@@ -73,7 +73,9 @@ public class LonelyTwitterActivity extends Activity {
 		try {
 			FileInputStream fis = openFileInput(FILENAME);
 			Type listType = new TypeToken<ArrayList<String>>() {}.getType();
-			gson.fromJson(fis,listType);
+			InputStreamReader isr = new InputStreamReader(fis);
+			tweets = gson.fromJson(isr,listType);
+			fis.close();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -81,6 +83,10 @@ public class LonelyTwitterActivity extends Activity {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		if(tweets ==null)
+		{
+			tweets = new ArrayList<String>();
 		}
 		return tweets;
 	}
@@ -93,6 +99,7 @@ public class LonelyTwitterActivity extends Activity {
 			
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 			gson.toJson(tweets, osw);
+			osw.flush();  
 			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
