@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.google.gson.Gson;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -44,7 +45,7 @@ public class LonelyTwitterActivity extends Activity {
 				tweets.add(text);
 				adapter.notifyDataSetChanged();
 				saveInFile(text, new Date(System.currentTimeMillis()));
-				//finish();
+				
 
 			}
 		});
@@ -84,6 +85,7 @@ public class LonelyTwitterActivity extends Activity {
 	}
 	
 	private void saveInFile(String text, Date date) {
+		Gson gson = new Gson();
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
 					Context.MODE_APPEND);
