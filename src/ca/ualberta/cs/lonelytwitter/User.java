@@ -1,7 +1,8 @@
 package ca.ualberta.cs.lonelytwitter;
 
-public abstract class User extends Object implements UserLike
+public abstract class User extends Object 
 {
+/*
 	protected String username;
 
 	
@@ -28,5 +29,5 @@ public abstract class User extends Object implements UserLike
 		super();
 		this.username = "anonymous";
 	}
-	
+	*/
 }

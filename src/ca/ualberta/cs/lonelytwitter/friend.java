@@ -1,7 +1,7 @@
 package ca.ualberta.cs.lonelytwitter;
 
 
-public class friend extends Addsomecass 
+public class friend  
 {
-	sjkdfls
+	
 }

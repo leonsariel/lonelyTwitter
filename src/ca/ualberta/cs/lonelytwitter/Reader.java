@@ -1,9 +1,9 @@
 package ca.ualberta.cs.lonelytwitter;
 
 
-public class Reader extends User
+public class Reader 
 {
-	public void setUsername(String x)
+/*	public void setUsername(String x)
 	{
 		if (x.length() <= 8){
 			throw new RuntimeException("name too short!");
@@ -11,4 +11,5 @@ public class Reader extends User
 		
 		this.username = x;
 	}
+	*/
 }
