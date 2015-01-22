@@ -6,10 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -64,15 +68,12 @@ public class LonelyTwitterActivity extends Activity {
 	}
 
 	private ArrayList<String> loadFromFile() {
+		Gson gson = new Gson();
 		ArrayList<String> tweets = new ArrayList<String>();
 		try {
 			FileInputStream fis = openFileInput(FILENAME);
-			BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-			String line = in.readLine();
-			while (line != null) {
-				tweets.add(line);
-				line = in.readLine();
-			}
+			Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+			gson.fromJson(fis,listType);
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -88,9 +89,10 @@ public class LonelyTwitterActivity extends Activity {
 		Gson gson = new Gson();
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
-					Context.MODE_APPEND);
-			fos.write(new String(date.toString() + " | " + text)
-					.getBytes());
+					0);     //defult is earsing all file
+			
+			OutputStreamWriter osw = new OutputStreamWriter(fos);
+			gson.toJson(tweets, osw);
 			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
